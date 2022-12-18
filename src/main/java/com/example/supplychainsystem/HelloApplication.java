@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
       TextField emailTextField=new TextField();
       PasswordField passwordField= new PasswordField();
       GridPane gridPane= new GridPane();
+      // first is x coordinate and seond is y
       gridPane.add(emailLabel,0,0);
       gridPane.add(emailTextField,1,0);
       gridPane.add(passwordLabel,0,1);
@@ -26,6 +27,7 @@ public class HelloApplication extends Application {
     }
     private Pane createContent(){
         Pane root= new Pane();
+        root.getChildren().addAll(loginPage());
         return root;
     }
     @Override
