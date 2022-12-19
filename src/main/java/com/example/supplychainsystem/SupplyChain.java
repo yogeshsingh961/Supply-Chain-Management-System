@@ -17,6 +17,8 @@ import javafx.scene.layout.Pane;
 public class SupplyChain extends Application {
     public static final int width=700,height=600,headerbar=50;
     Pane bodyPane= new Pane();
+    Login login= new Login();
+    ProductDetails productDetails= new ProductDetails();
     private GridPane headerBar(){
        TextField searchText= new TextField();
        Button searchButton= new Button("Search");
@@ -45,7 +47,13 @@ public class SupplyChain extends Application {
           public void handle(ActionEvent actionEvent) {
               String email= emailTextField.getText();
               String password= passwordField.getText();
-              messageLabel.setText(email +" $$ "+ password);
+            //  messageLabel.setText(email +" $$ "+ password);
+              if(login.customerLogin(email,password)){
+                  messageLabel.setText("Login Successful");
+
+              }else{
+                  messageLabel.setText("Login Failed");
+              }
           }
       });
       GridPane gridPane= new GridPane();
@@ -71,7 +79,7 @@ public class SupplyChain extends Application {
         root.setPrefSize(width,height+headerbar);
         bodyPane.setMinSize(width,height);
         bodyPane.setTranslateY(headerbar);
-        bodyPane.getChildren().addAll(loginPage());
+        bodyPane.getChildren().addAll(productDetails.getAllProduct());
 
         root.getChildren().addAll(headerBar(),bodyPane);
 
