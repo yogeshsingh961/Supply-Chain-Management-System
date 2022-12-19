@@ -17,11 +17,25 @@ import javafx.scene.layout.Pane;
 public class SupplyChain extends Application {
     public static final int width=700,height=600,headerbar=50;
     Pane bodyPane= new Pane();
+    public static int bodyWidth,bodyHeight;
     Login login= new Login();
     ProductDetails productDetails= new ProductDetails();
     private GridPane headerBar(){
        TextField searchText= new TextField();
        Button searchButton= new Button("Search");
+       searchButton.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent actionEvent) {
+               String productName=searchText.getText();
+               productDetails.getProductByName(productName);
+               //clear body and put this new pane in the body
+               bodyPane.getChildren().clear();
+               bodyPane.getChildren().add(productDetails.getProductByName(productName));
+           }
+       });
+
+
+
        GridPane gridPane= new GridPane();
        gridPane.setMinSize(bodyPane.getMinWidth(),headerbar-10);
 
@@ -78,7 +92,7 @@ public class SupplyChain extends Application {
         Pane root= new Pane();
         root.setPrefSize(width,height+headerbar);
         bodyPane.setMinSize(width,height);
-        bodyPane.setTranslateY(headerbar);
+            bodyPane.setTranslateY(headerbar);
         bodyPane.getChildren().addAll(productDetails.getAllProduct());
 
         root.getChildren().addAll(headerBar(),bodyPane);
